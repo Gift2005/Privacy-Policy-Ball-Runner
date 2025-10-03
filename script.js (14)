@@ -1,0 +1,30 @@
+// Ball Runner Privacy Policy Interactivity
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Dates
+  const today = new Date().toLocaleDateString();
+  document.getElementById('effective').textContent = `Effective date: ${today}`;
+  document.getElementById('lastUpdated').textContent = `Last updated: ${today}`;
+
+  // Accordion
+  const buttons = document.querySelectorAll('.accordion-btn');
+  buttons.forEach(btn => {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        btn.setAttribute('aria-expanded', 'false');
+        panel.style.maxHeight = null;
+        panel.style.padding = "0 16px";
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.style.padding = "14px 18px";
+      }
+    });
+  });
+
+  // Open first section
+  if (buttons[0]) buttons[0].click();
+});
